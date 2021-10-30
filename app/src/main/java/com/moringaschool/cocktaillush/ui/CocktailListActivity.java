@@ -151,7 +151,7 @@ public class CocktailListActivity extends AppCompatActivity {
 
                     cocktails = response.body().getDrinks();
                     mAdapter = new CocktailListadapter(CocktailListActivity.this, cocktails);
-                    new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
+                   // new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
                     mRecyclerView.setAdapter(mAdapter);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CocktailListActivity.this);
                     mRecyclerView.setLayoutManager(layoutManager);
@@ -232,19 +232,21 @@ public class CocktailListActivity extends AppCompatActivity {
         mEditor.putString(Constants.PREFERENCES_NAME_KEY, name).apply();
     }
 
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
+//    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+//        @Override
+//        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+//            return false;
+//        }
+//
+//        @Override
+//        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+//            //mCocktailReference.removeValue()
+//            cocktails.remove(viewHolder.getAdapterPosition());
+//            mAdapter.notifyDataSetChanged();
+//
+//        }
+//    };
 
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            //mCocktailReference.removeValue()
-            cocktails.remove(viewHolder.getAdapterPosition());
-            mAdapter.notifyDataSetChanged();
 
-        }
-    };
 
 }
