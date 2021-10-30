@@ -2,6 +2,7 @@ package com.moringaschool.cocktaillush.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +31,8 @@ public class SavedCocktailListActivity extends AppCompatActivity {
     private DatabaseReference mCocktailReference;
     private FirebaseRecyclerAdapter<Drink, FirebaseCocktailViewHolder> mFirebaseAdapter;
 
-    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
     @BindView(R.id.errorTextView)
     TextView mErrorTextView;
     @BindView(R.id.progressBar)
@@ -45,20 +47,20 @@ public class SavedCocktailListActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
 
-        mCocktailReference =FirebaseDatabase
-                            .getInstance()
-                            .getReference(Constants.FIREBASE_CHILD_COCKTAILS)
-                            .child(uid);
+        mCocktailReference = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_COCKTAILS)
+                .child(uid);
 
         setUpFirebaseAdapter();
         hideProgressBar();
         showCocktails();
     }
 
-    private void setUpFirebaseAdapter(){
+    private void setUpFirebaseAdapter() {
         FirebaseRecyclerOptions<Drink> options =
                 new FirebaseRecyclerOptions.Builder<Drink>()
-                        .setQuery(mCocktailReference,   Drink.class)
+                        .setQuery(mCocktailReference, Drink.class)
                         .build();
 
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Drink, FirebaseCocktailViewHolder>(options) {
@@ -88,7 +90,7 @@ public class SavedCocktailListActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if(mFirebaseAdapter!= null) {
+        if (mFirebaseAdapter != null) {
             mFirebaseAdapter.stopListening();
         }
     }
@@ -100,4 +102,6 @@ public class SavedCocktailListActivity extends AppCompatActivity {
     private void hideProgressBar() {
         mProgressBar.setVisibility(View.GONE);
     }
+
+
 }

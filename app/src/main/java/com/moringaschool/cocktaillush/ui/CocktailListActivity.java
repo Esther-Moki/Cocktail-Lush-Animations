@@ -1,6 +1,8 @@
 package com.moringaschool.cocktaillush.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -149,10 +151,12 @@ public class CocktailListActivity extends AppCompatActivity {
 
                     cocktails = response.body().getDrinks();
                     mAdapter = new CocktailListadapter(CocktailListActivity.this, cocktails);
+                    new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
                     mRecyclerView.setAdapter(mAdapter);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CocktailListActivity.this);
                     mRecyclerView.setLayoutManager(layoutManager);
                     mRecyclerView.setHasFixedSize(true);
+                   // new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
 
                     showCocktails();
 
@@ -227,5 +231,20 @@ public class CocktailListActivity extends AppCompatActivity {
     private void addToSharedPreferences(String name) {
         mEditor.putString(Constants.PREFERENCES_NAME_KEY, name).apply();
     }
+
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            //mCocktailReference.removeValue()
+            cocktails.remove(viewHolder.getAdapterPosition());
+            mAdapter.notifyDataSetChanged();
+
+        }
+    };
 
 }
