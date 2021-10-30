@@ -26,6 +26,7 @@ import com.moringaschool.cocktaillush.models.CocktailSearchResponse;
 import com.moringaschool.cocktaillush.models.Drink;
 import com.moringaschool.cocktaillush.network.CocktailApi;
 import com.moringaschool.cocktaillush.network.CocktailDbClient;
+import com.moringaschool.cocktaillush.util.MyItemTouchHelper;
 
 import java.util.List;
 
@@ -156,6 +157,13 @@ public class CocktailListActivity extends AppCompatActivity {
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CocktailListActivity.this);
                     mRecyclerView.setLayoutManager(layoutManager);
                     mRecyclerView.setHasFixedSize(true);
+
+
+                    //new part
+                    ItemTouchHelper.Callback callback = new MyItemTouchHelper(mAdapter);
+                    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+                    mAdapter.setTouchHelper(itemTouchHelper);
+                    itemTouchHelper.attachToRecyclerView(mRecyclerView);
                    // new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
 
                     showCocktails();
