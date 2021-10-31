@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.moringaschool.cocktaillush.R;
 import com.moringaschool.cocktaillush.models.Drink;
 import com.moringaschool.cocktaillush.ui.CocktailDetailActivity;
-import com.moringaschool.cocktaillush.util.ItemTouchHelperAdapter;
+//import com.moringaschool.cocktaillush.util.ItemTouchHelperAdapter;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -28,10 +28,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CocktailListadapter  extends RecyclerView.Adapter<CocktailListadapter.CocktailViewHolder> implements ItemTouchHelperAdapter {
+public class CocktailListadapter  extends RecyclerView.Adapter<CocktailListadapter.CocktailViewHolder>{
     private List<Drink> mCocktails;
     private Context mContext;
-    private ItemTouchHelper mTouchHelper;
+    //private ItemTouchHelper mTouchHelper;
 
     public CocktailListadapter(Context context, List<Drink> cocktails) {
         mContext = context;
@@ -58,28 +58,28 @@ public class CocktailListadapter  extends RecyclerView.Adapter<CocktailListadapt
 
 
     //the 2 methods
-    @Override
-    public void onItemMove(int fromPosition, int toPosition) {
-         Drink fromCocktail = mCocktails.get(fromPosition);
-         mCocktails.remove(fromCocktail);
-         notifyItemMoved(fromPosition,toPosition);
-    }
+//            @Override
+//            public void onItemMove(int fromPosition, int toPosition) {
+//                 Drink fromCocktail = mCocktails.get(fromPosition);
+//                 mCocktails.remove(fromCocktail);
+//                 notifyItemMoved(fromPosition,toPosition);
+//            }
+//
+//            @Override
+//            public void onItemSwiped(int position) {
+//                mCocktails.remove(position);
+//                notifyItemRemoved(position);
+//
+//            }
 
-    @Override
-    public void onItemSwiped(int position) {
-        mCocktails.remove(position);
-        notifyItemRemoved(position);
-
-    }
-
-    public void  setTouchHelper(ItemTouchHelper touchHelper) {
-        this.mTouchHelper = touchHelper;
-    }
+//    public void  setTouchHelper(ItemTouchHelper touchHelper) {
+//        this.mTouchHelper = touchHelper;
+//    }
 
     public class CocktailViewHolder extends RecyclerView.ViewHolder  implements
-             View.OnClickListener,
-             View.OnTouchListener,
-             GestureDetector.OnGestureListener
+             View.OnClickListener
+            // View.OnTouchListener,
+             //GestureDetector.OnGestureListener
          {
         @BindView(R.id.cocktailImageView) ImageView mCocktailImageView;
         @BindView(R.id.cocktailNameTextView) TextView mNameTextView;
@@ -96,9 +96,9 @@ public class CocktailListadapter  extends RecyclerView.Adapter<CocktailListadapt
             mContext = itemView.getContext();
 
 
-            mGestureDetector = new GestureDetector (itemView.getContext(),this);
+          //  mGestureDetector = new GestureDetector (itemView.getContext(),this);
             itemView.setOnClickListener(this);
-            itemView.setOnTouchListener(this);
+           // itemView.setOnTouchListener(this);
         }
 
         public void bindCocktail(Drink cocktail) {
@@ -117,41 +117,41 @@ public class CocktailListadapter  extends RecyclerView.Adapter<CocktailListadapt
             mContext.startActivity(intent);
         }
 
-             @Override
-             public boolean onDown(MotionEvent e) {
-                 return false;
-             }
-
-             @Override
-             public void onShowPress(MotionEvent e) {
-
-             }
-
-             @Override
-             public boolean onSingleTapUp(MotionEvent e) {
-                 return false;
-             }
-
-             @Override
-             public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-                 return false;
-             }
-
-             @Override
-             public void onLongPress(MotionEvent e) {
-                mTouchHelper.startDrag(this);
-
-             }
-
-             @Override
-             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                 return false;
-             }
-
-             @Override
-             public boolean onTouch(View v, MotionEvent event) {
-                 mGestureDetector.onTouchEvent(event);
-                 return true;
-             }
+//             @Override
+//             public boolean onDown(MotionEvent e) {
+//                 return false;
+//             }
+//
+//             @Override
+//             public void onShowPress(MotionEvent e) {
+//
+//             }
+//
+//             @Override
+//             public boolean onSingleTapUp(MotionEvent e) {
+//                 return false;
+//             }
+//
+//             @Override
+//             public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+//                 return false;
+//             }
+//
+//             @Override
+//             public void onLongPress(MotionEvent e) {
+//                mTouchHelper.startDrag(this);
+//
+//             }
+//
+//             @Override
+//             public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+//                 return false;
+//             }
+//
+//             @Override
+//             public boolean onTouch(View v, MotionEvent event) {
+//                 mGestureDetector.onTouchEvent(event);
+//                 return true;
+//             }
          }
 }
