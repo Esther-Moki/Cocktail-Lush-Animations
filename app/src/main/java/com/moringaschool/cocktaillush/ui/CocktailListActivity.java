@@ -241,19 +241,19 @@ public class CocktailListActivity extends AppCompatActivity {
 
 
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
 
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            //mCocktailReference.removeValue()
-            cocktails.remove(viewHolder.getAdapterPosition());
-            mAdapter.notifyDataSetChanged();
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                //mCocktailReference.removeValue()
+                cocktails.remove(viewHolder.getAdapterPosition());
+                mAdapter.notifyDataSetChanged();
 
-        }
-
+            }
+        };
 }
 
 
