@@ -87,7 +87,7 @@ public class CocktailListadapter  extends RecyclerView.Adapter<CocktailListadapt
         @BindView(R.id.cocktailClassTextView) TextView mCocktailClassTextView;
 
         private Context mContext;
-        GestureDetector mGestureDetector;
+        //GestureDetector mGestureDetector;
 
 
         public CocktailViewHolder(View itemView) {

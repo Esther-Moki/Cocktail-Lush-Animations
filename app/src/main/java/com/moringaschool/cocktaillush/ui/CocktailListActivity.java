@@ -153,7 +153,7 @@ public class CocktailListActivity extends AppCompatActivity {
 
                     cocktails = response.body().getDrinks();
                     mAdapter = new CocktailListadapter(CocktailListActivity.this, cocktails);
-                    // new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
+                     new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
                     mRecyclerView.setAdapter(mAdapter);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CocktailListActivity.this);
                     mRecyclerView.setLayoutManager(layoutManager);
