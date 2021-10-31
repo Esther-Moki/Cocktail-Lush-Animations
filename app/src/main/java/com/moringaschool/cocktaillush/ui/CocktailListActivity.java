@@ -48,11 +48,14 @@ public class CocktailListActivity extends AppCompatActivity {
 //    private ListView mListView;
 
 //  @BindView(R.id.listView) ListView mListView;
-   // @BindView(R.id.nameTextView) TextView mNameTextView;
+    // @BindView(R.id.nameTextView) TextView mNameTextView;
 
-    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
-    @BindView(R.id.errorTextView) TextView mErrorTextView;
-    @BindView(R.id.progressBar) ProgressBar mProgressBar;
+    @BindView(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+    @BindView(R.id.errorTextView)
+    TextView mErrorTextView;
+    @BindView(R.id.progressBar)
+    ProgressBar mProgressBar;
 
 
     public List<Drink> cocktails;
@@ -69,7 +72,6 @@ public class CocktailListActivity extends AppCompatActivity {
 //            "Beer-Italian Lager", "Calamansi Juice", "Blue Curacao syrup", "Black Pepper" };
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +80,7 @@ public class CocktailListActivity extends AppCompatActivity {
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentName = mSharedPreferences.getString(Constants.PREFERENCES_NAME_KEY, null);
-        if(mRecentName != null) {
+        if (mRecentName != null) {
             fetchCocktails(mRecentName);
 
         }
@@ -87,9 +89,9 @@ public class CocktailListActivity extends AppCompatActivity {
 //        mListView = (ListView) findViewById(R.id.listView);
 //        mNameTextView = (TextView) findViewById(R.id.nameTextView);
 
-        // ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, cocktails);
-       // MyCocktailArrayAdapter adapter = new MyCocktailArrayAdapter(this, android.R.layout.simple_list_item_1, cocktails, ingredients); // the arguments must match constructor's parameters!
-       // mListView.setAdapter(adapter);
+    // ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, cocktails);
+    // MyCocktailArrayAdapter adapter = new MyCocktailArrayAdapter(this, android.R.layout.simple_list_item_1, cocktails, ingredients); // the arguments must match constructor's parameters!
+    // mListView.setAdapter(adapter);
 
 //        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -99,14 +101,14 @@ public class CocktailListActivity extends AppCompatActivity {
 //            }
 //        });
 
-        //Intent intent = getIntent();
-       // String name = intent.getStringExtra("name");
-       // mNameTextView.setText("Here are all the " + name + " cocktails" );
+    //Intent intent = getIntent();
+    // String name = intent.getStringExtra("name");
+    // mNameTextView.setText("Here are all the " + name + " cocktails" );
 
-        //API part
+    //API part
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
         ButterKnife.bind(this);
@@ -135,8 +137,7 @@ public class CocktailListActivity extends AppCompatActivity {
     }
 
 
-
-    private void fetchCocktails(String name){
+    private void fetchCocktails(String name) {
 
         CocktailApi client = CocktailDbClient.getClient();
 
@@ -145,14 +146,14 @@ public class CocktailListActivity extends AppCompatActivity {
         call.enqueue(new Callback<CocktailSearchResponse>() {
             @Override
             public void onResponse(Call<CocktailSearchResponse> call, Response<CocktailSearchResponse> response) {
-               hideProgressBar();
+                hideProgressBar();
                 if (response.isSuccessful()) {
-                   assert response.body() != null;
+                    assert response.body() != null;
                     //List<Drink> cocktailsList = response.body().getDrinks();
 
                     cocktails = response.body().getDrinks();
                     mAdapter = new CocktailListadapter(CocktailListActivity.this, cocktails);
-                   // new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
+                    // new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
                     mRecyclerView.setAdapter(mAdapter);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CocktailListActivity.this);
                     mRecyclerView.setLayoutManager(layoutManager);
@@ -164,12 +165,12 @@ public class CocktailListActivity extends AppCompatActivity {
                     ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
                     mAdapter.setTouchHelper(itemTouchHelper);
                     itemTouchHelper.attachToRecyclerView(mRecyclerView);
-                   // new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
+                    // new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
 
                     showCocktails();
 
 
-                   // Log.d("response","response is" + cocktailsList) ;
+                    // Log.d("response","response is" + cocktailsList) ;
 //                    String[] drink = new String[cocktailsList.size()];
 //                    String[] alcoholic = new String[cocktailsList.size()];
 //                    String[] instructions = new String[cocktailsList.size()];
@@ -200,15 +201,13 @@ public class CocktailListActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<CocktailSearchResponse> call, Throwable t) {
-                Log.e("Error Message", "onFailure: ",t );
+                Log.e("Error Message", "onFailure: ", t);
                 hideProgressBar();
                 showFailureMessage();
             }
 
         });
     }
-
-
 
 
     @Override
@@ -239,6 +238,18 @@ public class CocktailListActivity extends AppCompatActivity {
     private void addToSharedPreferences(String name) {
         mEditor.putString(Constants.PREFERENCES_NAME_KEY, name).apply();
     }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 //    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
 //        @Override
@@ -257,4 +268,3 @@ public class CocktailListActivity extends AppCompatActivity {
 
 
 
-}
