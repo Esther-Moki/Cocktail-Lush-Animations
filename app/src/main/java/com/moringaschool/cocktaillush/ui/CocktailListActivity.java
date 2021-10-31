@@ -149,7 +149,7 @@ public class CocktailListActivity extends AppCompatActivity {
                 hideProgressBar();
                 if (response.isSuccessful()) {
                     assert response.body() != null;
-                    //List<Drink> cocktailsList = response.body().getDrinks();
+                    List<Drink> cocktailsList = response.body().getDrinks();
 
                     cocktails = response.body().getDrinks();
                     mAdapter = new CocktailListadapter(CocktailListActivity.this, cocktails);
