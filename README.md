@@ -12,7 +12,7 @@ to store the users previously searched and saved cocktails.
 
 ## Description
 This project helps one when they are looking for any cocktail of which one just only knows the name,
- type, some ingredient or even an image inshort any of the listed above, then one can surely find that cocktail here.
+ type, some ingredient or even an image in short any of the listed above, then one can surely find that cocktail here.
 
 
 ## Setup/Installation Requirement
