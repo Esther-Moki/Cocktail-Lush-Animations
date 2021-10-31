@@ -26,7 +26,7 @@ import com.moringaschool.cocktaillush.models.CocktailSearchResponse;
 import com.moringaschool.cocktaillush.models.Drink;
 import com.moringaschool.cocktaillush.network.CocktailApi;
 import com.moringaschool.cocktaillush.network.CocktailDbClient;
-import com.moringaschool.cocktaillush.util.MyItemTouchHelper;
+//import com.moringaschool.cocktaillush.util.MyItemTouchHelper;
 
 import java.util.List;
 
@@ -161,10 +161,10 @@ public class CocktailListActivity extends AppCompatActivity {
 
 
                     //new part
-                    ItemTouchHelper.Callback callback = new MyItemTouchHelper(mAdapter);
-                    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
-                    mAdapter.setTouchHelper(itemTouchHelper);
-                    itemTouchHelper.attachToRecyclerView(mRecyclerView);
+//                            ItemTouchHelper.Callback callback = new MyItemTouchHelper(mAdapter);
+//                            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+//                            mAdapter.setTouchHelper(itemTouchHelper);
+//                            itemTouchHelper.attachToRecyclerView(mRecyclerView);
                     // new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
 
                     showCocktails();
@@ -238,6 +238,22 @@ public class CocktailListActivity extends AppCompatActivity {
     private void addToSharedPreferences(String name) {
         mEditor.putString(Constants.PREFERENCES_NAME_KEY, name).apply();
     }
+
+
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            //mCocktailReference.removeValue()
+            cocktails.remove(viewHolder.getAdapterPosition());
+            mAdapter.notifyDataSetChanged();
+
+        }
+
 }
 
 
