@@ -3,7 +3,7 @@
 The Cocktail Lush project happens to be a simple cocktail app written in java using android studio that allows
 you to search for recipes, images of specific cocktails, ingredients, filter by alcoholic, non alcoholic and more by fetching data from the
 Cocktails DB API,an API where one get data on alcohol & cocktails.When a cocktail is clicked a new fragment
-appears that gives the user the drink name, ingredients , and directions on how to make the cocktail.The app is also linked to firebase 
+appears that gives the user the drink name, ingredients and directions on how to make the cocktail.The app is also linked to firebase 
 to store the users previously searched and saved cocktails.
 
 
