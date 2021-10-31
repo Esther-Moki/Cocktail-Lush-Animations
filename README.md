@@ -8,7 +8,7 @@ to store the users previously searched and saved cocktails.
 
 
 * By Esther Moki
-* Date of current version:24/10/2021
+* Date of current version:31/10/2021
 
 ## Description
 This project helps one when they are looking for any cocktail of which one just only knows the name,
