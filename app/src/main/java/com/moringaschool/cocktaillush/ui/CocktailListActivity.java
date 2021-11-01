@@ -28,6 +28,8 @@ import com.moringaschool.cocktaillush.network.CocktailApi;
 import com.moringaschool.cocktaillush.network.CocktailDbClient;
 //import com.moringaschool.cocktaillush.util.MyItemTouchHelper;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -153,7 +155,11 @@ public class CocktailListActivity extends AppCompatActivity {
 
                     cocktails = response.body().getDrinks();
                     mAdapter = new CocktailListadapter(CocktailListActivity.this, cocktails);
-                     new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
+                    new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(mRecyclerView);
+
+                    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchHelperCallback);
+                    itemTouchHelper.attachToRecyclerView(mRecyclerView);
+
                     mRecyclerView.setAdapter(mAdapter);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CocktailListActivity.this);
                     mRecyclerView.setLayoutManager(layoutManager);
@@ -240,9 +246,15 @@ public class CocktailListActivity extends AppCompatActivity {
     }
 
 
-        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                int fromPosition = viewHolder.getAdapterPosition();
+                int toPosition = viewHolder.getLayoutPosition();
+
+                Collections.swap(cocktails,fromPosition,toPosition);
+                mRecyclerView.getAdapter().notifyItemMoved(fromPosition,toPosition);
+
                 return false;
             }
 
